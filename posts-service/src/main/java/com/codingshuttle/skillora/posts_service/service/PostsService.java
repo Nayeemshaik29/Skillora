@@ -1,5 +1,8 @@
 package com.codingshuttle.skillora.posts_service.service;
 
+import com.codingshuttle.skillora.posts_service.auth.UserContextHolder;
+import com.codingshuttle.skillora.posts_service.clients.ConnectionsClient;
+import com.codingshuttle.skillora.posts_service.dto.PersonDto;
 import com.codingshuttle.skillora.posts_service.dto.PostCreateRequestDto;
 import com.codingshuttle.skillora.posts_service.dto.PostDto;
 import com.codingshuttle.skillora.posts_service.entity.Post;
@@ -22,6 +25,7 @@ public class PostsService {
 
     private final PostsRepository postsRepository;
     private final ModelMapper modelMapper;
+    private final ConnectionsClient connectionsClient;
 
     public PostDto createPost(PostCreateRequestDto postDto ,Long userId) {
         Post post = modelMapper.map(postDto, Post.class);
@@ -33,6 +37,11 @@ public class PostsService {
 
     public PostDto getPostById(Long postId) {
         log.debug("Retrieving  post with id {}", postId);
+
+        Long userId = UserContextHolder.getCurrentUserId();
+
+        List<PersonDto> firstConnections = connectionsClient.getFirstConnections();
+
         Post post = postsRepository.findById(postId).orElseThrow(()->
                 new ResourceNotFoundException("post not found with id: "+postId));
         return modelMapper.map(post, PostDto.class);

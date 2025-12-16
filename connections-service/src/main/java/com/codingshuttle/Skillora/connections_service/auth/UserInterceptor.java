@@ -1,4 +1,4 @@
-package com.codingshuttle.skillora.posts_service.auth;
+package com.codingshuttle.Skillora.connections_service.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

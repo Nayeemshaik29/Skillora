@@ -34,3 +34,6 @@ eureka:
       prefer-ip-address: true
       lease-removal-interval-in-seconds: 10
       lease-expiration-duration-in-seconds: 30
+
+jwt:
+  secretKey: sodjkbv398g793gfbu234bc743fbuewbcj382938ry4848757@@*##^$&%#^*^@(*
