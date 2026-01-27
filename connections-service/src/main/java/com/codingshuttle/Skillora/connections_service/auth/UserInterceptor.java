@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 
-@Component 
+@Component
 public class UserInterceptor implements HandlerInterceptor {
 
     @Override

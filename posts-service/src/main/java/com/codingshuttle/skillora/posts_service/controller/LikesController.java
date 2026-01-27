@@ -1,7 +1,7 @@
 package com.codingshuttle.skillora.posts_service.controller;
 
 
-import com.codingshuttle.skillora.posts_service.repository.PostLikeRepository;
+
 import com.codingshuttle.skillora.posts_service.service.PostLikeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +15,14 @@ public class LikesController {
 
     @PostMapping("/{postId}")
     public ResponseEntity<Void> likePost(@PathVariable Long postId){
-        postLikeService.likePost(postId,1L);
+        postLikeService.likePost(postId);
         return ResponseEntity.noContent().build();
 
     }
 
     @DeleteMapping("/{postId}")
     public ResponseEntity<Void> unlikePost(@PathVariable Long postId){
-        postLikeService.unlikePost(postId,1L);
+        postLikeService.unlikePost(postId);
         return ResponseEntity.noContent().build();
 
     }

@@ -4,9 +4,7 @@ spring:
 
   cloud:
     gateway:
-      server:
-        webflux:
-          routes:
+         routes:
             - id: user-service
               uri: lb://USER-SERVICE
               predicates:

@@ -18,6 +18,6 @@ public class    ConnectionsController {
 
     @GetMapping("/first-degree")
     public ResponseEntity<List<Person>> getFirstConnections() {
-        return ResponseEntity.ok(connectionsService.getFirstDegreeConnections( ));
+        return ResponseEntity.ok(connectionsService.getFirstDegreeConnections());
     }
 }

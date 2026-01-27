@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 
@@ -37,13 +38,11 @@ public class AuthenticationFilter  extends AbstractGatewayFilterFactory<Authenti
             final String token = tokenHeader.split("Bearer ")[1];
             try {
                 String userId = jwtService.getUserIdFromToken(token);
-                ServerWebExchange modifiedExchnage = exchange
-                        .mutate()
-                        .request(r -> r.header("X-User-Id", userId))
+                ServerHttpRequest mutatedRequest = exchange.getRequest().mutate()
+                        .header("X-User-Id", userId.toString())
                         .build();
 
-
-                return chain.filter(modifiedExchnage);
+                return chain.filter(exchange.mutate().request(mutatedRequest).build());
             }catch(JwtException e)
             {
                 log.info("JWT Exception: {}",e.getLocalizedMessage());
